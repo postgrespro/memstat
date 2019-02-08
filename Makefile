@@ -4,8 +4,12 @@ DATA = memstat--1.0.sql
 OBJS = memstat.o
 REGRESS = memstat
 
+ifndef PG_CONFIG
+PG_CONFIG = pg_config
+endif
+
 ifdef USE_PGXS
-PGXS := $(shell pg_config --pgxs)
+PGXS := $(shell ${PG_CONFIG} --pgxs)
 include $(PGXS)
 else
 subdir = contrib/memstat
